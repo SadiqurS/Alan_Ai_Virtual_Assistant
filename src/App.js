@@ -6,7 +6,7 @@ import wordsToNumbers from 'words-to-numbers';
 import NewsCards from './components/NewsCards/NewsCards';
 import useStyles from './styles.js';
 
-const alanKey = 'ec6292f5aa174c39a1c46dbcf42531282e956eca572e1d8b807a3e2338fdd0dc/stage';
+const alanKey = ''; // Highly suggest you dont share your API key on github <3
 
 const App = () =>{
     const [newsArticles, setNewsArticles] = useState([]);
