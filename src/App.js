@@ -1,25 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState ,useEffect } from 'react';
+import alanBtn from '@alan-ai/alan-sdk-web';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import wordsToNumbers from 'words-to-numbers';
+
+import NewsCards from './components/NewsCards/NewsCards';
+import useStyles from './styles.js';
+
+const alanKey = 'ec6292f5aa174c39a1c46dbcf42531282e956eca572e1d8b807a3e2338fdd0dc/stage';
+
+const App = () =>{
+    const [newsArticles, setNewsArticles] = useState([]);
+    const [activeArticle, SetActiveArticle] = useState(-1);
+    const classes = useStyles();
+
+    useEffect(() => {
+        alanBtn({
+            key: alanKey,
+            onCommand: ({ command, articles, number }) => { 
+                if(command === 'newHeadlines') {
+                    setNewsArticles(articles);
+                    SetActiveArticle(-1);
+                } else if(command  === 'highlight'){
+                    SetActiveArticle((prevActiveArticle) => prevActiveArticle + 1);
+                } else if(command === 'open'){
+                    const parsedNumber = number.length > 2 ? wordsToNumbers(number, {fuzzy : true}) : number;
+                    const article = articles[parsedNumber - 1];
+
+                    if (parsedNumber > articles.length) {
+                        alanBtn().playText('Please try that again...');
+                      } else if (article) {
+                        window.open(article.url, '_blank');
+                        alanBtn().playText('Opening...');
+                      } else {
+                        alanBtn().playText('Please try that again...');
+                      }
+                }
+            },
+        });
+    }, []);
+    return(
+        <div>
+           <div>
+               <h1 id='header'>Alan AI Virtual Assistant</h1>
+               <p id='ped'>Created By Sadiqur Sakib</p>
+           </div>
+            <div className={classes.logoContainer}> 
+                <img src="https://avatars.githubusercontent.com/u/54960780?s=200&v=4" className={classes.alanLogo} alt="alan logo"/>
+            </div>
+            <NewsCards articles={newsArticles} activeArticle = {activeArticle} />
+        </div>
+    );
 }
 
-export default App;
+export default App;  
