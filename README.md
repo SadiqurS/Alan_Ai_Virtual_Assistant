@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Getting Started with Alan AI Virtual Assistant
 
 ![DA8C58E9-4E11-4E62-9E23-D4B5EEBEA742_1_105_c](https://user-images.githubusercontent.com/80724590/156939575-dd24a58d-4d5d-416e-bc28-710a07ae6bb9.jpeg)
 
@@ -70,3 +70,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+Features:
+ - Provide users with news across thousands of different sources 
+ - Provide users with date and weather across all regions
+ - Hold simple conversations with Alan
+ - Ask Alan to solve simple arithmetics
+ - Translate words or phrases from multiple different languages
+ 
+ 
